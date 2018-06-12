@@ -1,5 +1,10 @@
 # Verifiable-Random-Functions
 
-* https://cryptography.io/en/latest/hazmat/primitives/asymmetric/ec/
-* http://www.secg.org/SEC2-Ver-1.0.pdf
-* https://tools.ietf.org/html/draft-goldbe-vrf-01#section-5
+We implemented RSA VRF on Python2 fulfilling the properties of trusted uniqueness, trusted collision resistance, and full pseudorandomness.
+
+USAGE: python RSA_VRF.py [alpha]
+
+This code takes alpha and generates a proof and then proceeds to verify it. You can modify the size of the proof by modifying the variable k. 
+The slides are in the LaTeX PDF and make sure to install the libraries in the requirements.txt.
+
+
