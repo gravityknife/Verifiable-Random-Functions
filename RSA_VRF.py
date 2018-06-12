@@ -6,7 +6,7 @@ import sys
 from sys import argv
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
-# https://github.com/bdauvergne/python-pkcs1/blob/master/pkcs1/keys.py
+
 def integer_byte_size(n):
     '''Returns the number of bytes necessary to store the integer n.'''
     quanta, mod = divmod(integer_bit_size(n), 8)
@@ -115,7 +115,6 @@ def mgf1(mgf_seed, mask_len, hash_class=hashlib.sha1):
         T = T + hash_class(mgf_seed + C).digest()
     return T[:mask_len]
 
-# RSA-FDH-VRF https://tools.ietf.org/html/draft-goldbe-vrf-01#section-4
 def VRF_prove(private_key, alpha, k):
     # k is the length of pi
     EM = mgf1(alpha, k-1)
@@ -140,7 +139,7 @@ def VRF_verifying(public_key, alpha, pi, k):
 
 if __name__ == "__main__":
     if len(argv) < 2:
-        print "USAGE: python RSAFDH_VRF.py [alpha]"
+        print "USAGE: python RSA_VRF.py [alpha]"
         exit(1)
     private_key = rsa.generate_private_key(
         public_exponent=65537,
