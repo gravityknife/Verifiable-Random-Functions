@@ -116,7 +116,7 @@ def mgf1(mgf_seed, mask_len, hash_class=hashlib.sha1):
     return T[:mask_len]
 
 # RSA-FDH-VRF https://tools.ietf.org/html/draft-goldbe-vrf-01#section-4
-def VRF_prove(public_key, private_key, alpha, k):
+def VRF_prove(private_key, alpha, k):
     # k is the length of pi
     EM = mgf1(alpha, k-1)
     m = os2ip(EM)
@@ -156,6 +156,6 @@ if __name__ == "__main__":
     public_key = RsaPublicKey(n, e)
     private_key = RsaPrivateKey(n, d)
     alpha = " ".join(argv[1:])
-    pi = VRF_prove(public_key, private_key, alpha, k)
+    pi = VRF_prove(private_key, alpha, k)
     beta = VRF_proof2hash(pi)
     print(VRF_verifying(public_key, alpha, pi, k))
